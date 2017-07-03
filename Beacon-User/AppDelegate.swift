@@ -7,15 +7,33 @@
 //
 
 import UIKit
+import Firebase
+
+extension UIView {
+    func menu() {
+        var frame = self.superview?.frame
+        if frame?.origin.x == 0 {
+            frame?.origin.x = 200
+        }else{
+            frame?.origin.x = 0
+        }
+        UIView.animate(withDuration: 0.5){
+            self.superview?.frame = frame!
+        }
+    }
+}
+
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
         return true
     }
 

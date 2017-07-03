@@ -7,21 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C1E4C471F076FDC0003090D /* EditInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1E4C461F076FDC0003090D /* EditInfoController.swift */; };
 		6C26B1F01EEFC7FD001C0DCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C26B1EF1EEFC7FD001C0DCA /* AppDelegate.swift */; };
-		6C26B1F21EEFC7FD001C0DCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C26B1F11EEFC7FD001C0DCA /* ViewController.swift */; };
 		6C26B1F51EEFC7FD001C0DCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C26B1F31EEFC7FD001C0DCA /* Main.storyboard */; };
 		6C26B1F71EEFC7FD001C0DCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C26B1F61EEFC7FD001C0DCA /* Assets.xcassets */; };
 		6C26B1FA1EEFC7FD001C0DCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C26B1F81EEFC7FD001C0DCA /* LaunchScreen.storyboard */; };
+		6C26B2031EEFC8AA001C0DCA /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C26B2021EEFC8A9001C0DCA /* EstimoteSDK.framework */; };
+		6C3432CF1EF0E8A900AA0476 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432CE1EF0E8A900AA0476 /* SignUpController.swift */; };
+		6C3432D11EF0EA6100AA0476 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432D01EF0EA6100AA0476 /* LoginController.swift */; };
+		6C3432D51EF0EF6500AA0476 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C3432D41EF0EF6500AA0476 /* GoogleService-Info.plist */; };
+		6C3432D71EF1358400AA0476 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432D61EF1358400AA0476 /* HomePageController.swift */; };
+		6C3432D91EF1395300AA0476 /* FirstUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432D81EF1395300AA0476 /* FirstUserController.swift */; };
+		6C3432DB1EF2776500AA0476 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432DA1EF2776500AA0476 /* WelcomeController.swift */; };
+		6C3432DD1EF7850000AA0476 /* PairPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432DC1EF7850000AA0476 /* PairPageController.swift */; };
+		6C3432DF1EF7A75700AA0476 /* ListItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3432DE1EF7A75700AA0476 /* ListItemController.swift */; };
+		6CE583B61F08B5A100C98724 /* InterestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE583B51F08B5A100C98724 /* InterestController.swift */; };
+		7E0FAA908FC93D953754EABA /* Pods_Beacon_User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D4D639B40CEF66CD3907B6 /* Pods_Beacon_User.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C1E4C461F076FDC0003090D /* EditInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditInfoController.swift; sourceTree = "<group>"; };
 		6C26B1EC1EEFC7FD001C0DCA /* Beacon-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beacon-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C26B1EF1EEFC7FD001C0DCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6C26B1F11EEFC7FD001C0DCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6C26B1F41EEFC7FD001C0DCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C26B1F61EEFC7FD001C0DCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C26B1F91EEFC7FD001C0DCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C26B1FB1EEFC7FD001C0DCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C26B2021EEFC8A9001C0DCA /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EstimoteSDK.framework; path = "Beacon-User/EstimoteSDK/EstimoteSDK.framework"; sourceTree = "<group>"; };
+		6C26B2051EEFCBB5001C0DCA /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		6C3432CE1EF0E8A900AA0476 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		6C3432D01EF0EA6100AA0476 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		6C3432D41EF0EF6500AA0476 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6C3432D61EF1358400AA0476 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		6C3432D81EF1395300AA0476 /* FirstUserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstUserController.swift; sourceTree = "<group>"; };
+		6C3432DA1EF2776500AA0476 /* WelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		6C3432DC1EF7850000AA0476 /* PairPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairPageController.swift; sourceTree = "<group>"; };
+		6C3432DE1EF7A75700AA0476 /* ListItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListItemController.swift; sourceTree = "<group>"; };
+		6CE583B51F08B5A100C98724 /* InterestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestController.swift; sourceTree = "<group>"; };
+		75D4D639B40CEF66CD3907B6 /* Pods_Beacon_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beacon_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D642C83C779EEB7F11F96115 /* Pods-Beacon-User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beacon-User.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beacon-User/Pods-Beacon-User.release.xcconfig"; sourceTree = "<group>"; };
+		E9B2B72650A87541EC74D7A3 /* Pods-Beacon-User.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beacon-User.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Beacon-User/Pods-Beacon-User.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C26B2031EEFC8AA001C0DCA /* EstimoteSDK.framework in Frameworks */,
+				7E0FAA908FC93D953754EABA /* Pods_Beacon_User.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +67,8 @@
 			children = (
 				6C26B1EE1EEFC7FD001C0DCA /* Beacon-User */,
 				6C26B1ED1EEFC7FD001C0DCA /* Products */,
+				6C26B2011EEFC8A7001C0DCA /* Frameworks */,
+				E594D7C47B89D3898D550B1B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +83,42 @@
 		6C26B1EE1EEFC7FD001C0DCA /* Beacon-User */ = {
 			isa = PBXGroup;
 			children = (
+				6C3432D41EF0EF6500AA0476 /* GoogleService-Info.plist */,
 				6C26B1EF1EEFC7FD001C0DCA /* AppDelegate.swift */,
-				6C26B1F11EEFC7FD001C0DCA /* ViewController.swift */,
+				6C3432DE1EF7A75700AA0476 /* ListItemController.swift */,
 				6C26B1F31EEFC7FD001C0DCA /* Main.storyboard */,
 				6C26B1F61EEFC7FD001C0DCA /* Assets.xcassets */,
 				6C26B1F81EEFC7FD001C0DCA /* LaunchScreen.storyboard */,
 				6C26B1FB1EEFC7FD001C0DCA /* Info.plist */,
+				6C26B2051EEFCBB5001C0DCA /* ObjCBridge.h */,
+				6C3432CE1EF0E8A900AA0476 /* SignUpController.swift */,
+				6C3432D01EF0EA6100AA0476 /* LoginController.swift */,
+				6C3432D61EF1358400AA0476 /* HomePageController.swift */,
+				6C3432D81EF1395300AA0476 /* FirstUserController.swift */,
+				6C3432DA1EF2776500AA0476 /* WelcomeController.swift */,
+				6C3432DC1EF7850000AA0476 /* PairPageController.swift */,
+				6C1E4C461F076FDC0003090D /* EditInfoController.swift */,
+				6CE583B51F08B5A100C98724 /* InterestController.swift */,
 			);
 			path = "Beacon-User";
+			sourceTree = "<group>";
+		};
+		6C26B2011EEFC8A7001C0DCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C26B2021EEFC8A9001C0DCA /* EstimoteSDK.framework */,
+				75D4D639B40CEF66CD3907B6 /* Pods_Beacon_User.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E594D7C47B89D3898D550B1B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E9B2B72650A87541EC74D7A3 /* Pods-Beacon-User.debug.xcconfig */,
+				D642C83C779EEB7F11F96115 /* Pods-Beacon-User.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +128,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C26B1FE1EEFC7FD001C0DCA /* Build configuration list for PBXNativeTarget "Beacon-User" */;
 			buildPhases = (
+				5E3A285E33D5795AA6866C3F /* [CP] Check Pods Manifest.lock */,
 				6C26B1E81EEFC7FD001C0DCA /* Sources */,
 				6C26B1E91EEFC7FD001C0DCA /* Frameworks */,
 				6C26B1EA1EEFC7FD001C0DCA /* Resources */,
+				B683D8C9FC5F03F01BF16331 /* [CP] Embed Pods Frameworks */,
+				60AD8FF91A359EDC9F1B2B8D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C26B1FA1EEFC7FD001C0DCA /* LaunchScreen.storyboard in Resources */,
+				6C3432D51EF0EF6500AA0476 /* GoogleService-Info.plist in Resources */,
 				6C26B1F71EEFC7FD001C0DCA /* Assets.xcassets in Resources */,
 				6C26B1F51EEFC7FD001C0DCA /* Main.storyboard in Resources */,
 			);
@@ -132,13 +193,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5E3A285E33D5795AA6866C3F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		60AD8FF91A359EDC9F1B2B8D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Beacon-User/Pods-Beacon-User-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B683D8C9FC5F03F01BF16331 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Beacon-User/Pods-Beacon-User-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6C26B1E81EEFC7FD001C0DCA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C26B1F21EEFC7FD001C0DCA /* ViewController.swift in Sources */,
+				6C3432DD1EF7850000AA0476 /* PairPageController.swift in Sources */,
+				6CE583B61F08B5A100C98724 /* InterestController.swift in Sources */,
+				6C1E4C471F076FDC0003090D /* EditInfoController.swift in Sources */,
+				6C3432DB1EF2776500AA0476 /* WelcomeController.swift in Sources */,
+				6C3432D11EF0EA6100AA0476 /* LoginController.swift in Sources */,
 				6C26B1F01EEFC7FD001C0DCA /* AppDelegate.swift in Sources */,
+				6C3432D91EF1395300AA0476 /* FirstUserController.swift in Sources */,
+				6C3432CF1EF0E8A900AA0476 /* SignUpController.swift in Sources */,
+				6C3432D71EF1358400AA0476 /* HomePageController.swift in Sources */,
+				6C3432DF1EF7A75700AA0476 /* ListItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,26 +376,38 @@
 		};
 		6C26B1FF1EEFC7FD001C0DCA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9B2B72650A87541EC74D7A3 /* Pods-Beacon-User.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7JW385QV7K;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Beacon-User/EstimoteSDK",
+				);
 				INFOPLIST_FILE = "Beacon-User/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sslab.Beacon-User";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		6C26B2001EEFC7FD001C0DCA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D642C83C779EEB7F11F96115 /* Pods-Beacon-User.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7JW385QV7K;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Beacon-User/EstimoteSDK",
+				);
 				INFOPLIST_FILE = "Beacon-User/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sslab.Beacon-User";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -302,6 +431,7 @@
 				6C26B2001EEFC7FD001C0DCA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
