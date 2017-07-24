@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C1E4C471F076FDC0003090D /* EditInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1E4C461F076FDC0003090D /* EditInfoController.swift */; };
+		6C214A751F0F76F7007EE112 /* MoreInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C214A741F0F76F7007EE112 /* MoreInfoController.swift */; };
 		6C26B1F01EEFC7FD001C0DCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C26B1EF1EEFC7FD001C0DCA /* AppDelegate.swift */; };
 		6C26B1F51EEFC7FD001C0DCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C26B1F31EEFC7FD001C0DCA /* Main.storyboard */; };
 		6C26B1F71EEFC7FD001C0DCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C26B1F61EEFC7FD001C0DCA /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		6C1E4C461F076FDC0003090D /* EditInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditInfoController.swift; sourceTree = "<group>"; };
+		6C214A741F0F76F7007EE112 /* MoreInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoController.swift; sourceTree = "<group>"; };
 		6C26B1EC1EEFC7FD001C0DCA /* Beacon-User.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beacon-User.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C26B1EF1EEFC7FD001C0DCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C26B1F41EEFC7FD001C0DCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				6C26B1EF1EEFC7FD001C0DCA /* AppDelegate.swift */,
 				6C3432DE1EF7A75700AA0476 /* ListItemController.swift */,
 				6C26B1F31EEFC7FD001C0DCA /* Main.storyboard */,
+				6C214A741F0F76F7007EE112 /* MoreInfoController.swift */,
 				6C26B1F61EEFC7FD001C0DCA /* Assets.xcassets */,
 				6C26B1F81EEFC7FD001C0DCA /* LaunchScreen.storyboard */,
 				6C26B1FB1EEFC7FD001C0DCA /* Info.plist */,
@@ -256,6 +259,7 @@
 				6C3432CF1EF0E8A900AA0476 /* SignUpController.swift in Sources */,
 				6C3432D71EF1358400AA0476 /* HomePageController.swift in Sources */,
 				6C3432DF1EF7A75700AA0476 /* ListItemController.swift in Sources */,
+				6C214A751F0F76F7007EE112 /* MoreInfoController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

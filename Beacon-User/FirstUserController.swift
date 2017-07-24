@@ -18,6 +18,8 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var ref = Database.database().reference()
     @IBOutlet weak var jobPickerTextField: UITextField!
     let job = ["服務業","軍公教","學生","上班族"]
+    var userImgString = ""
+    let currentUser = Auth.auth().currentUser
     @IBOutlet weak var gender: UISegmentedControl!
     
     @IBOutlet weak var imageView: UIImageView!
@@ -78,11 +80,13 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                   "age" : Int(self.ageLabel.text!) ?? 18,
                   "job" : self.jobPickerTextField.text!,
                   "gender": self.gender.titleForSegment(at: self.gender.selectedSegmentIndex) ?? 0,
-                  "indoor": true,
+                  "image": self.userImgString,
+                  "interestScore": 0,
+                  "indoor": false,
                   "dirty" : false ]
        
             self.ref.child("users").child((user?.uid)!).setValue(userinfo)
-            self.performSegue(withIdentifier: "Golist", sender: userinfo)
+            self.performSegue(withIdentifier: "Interest", sender: userinfo)
         }
         
     }
@@ -90,6 +94,7 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if segue.identifier == "Golist" {
             let vc = segue.destination as! ListItemController
             vc.userInfo = sender as! Dictionary
+            vc.imageView = self.imageView
         }
     }
     
@@ -155,10 +160,12 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         // 可以自動產生一組獨一無二的 ID 號碼，方便等一下上傳圖片的命名
         let uniqueString = NSUUID().uuidString
-        
+        let uniString = currentUser?.uid ?? uniqueString
         // 當判斷有 selectedImage 時，我們會在 if 判斷式裡將圖片上傳
         if let selectedImage = selectedImageFromPicker {
-            let storageRef = Storage.storage().reference().child("UserImages").child("\(uniqueString).png")
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            self.imageView.image = #imageLiteral(resourceName: "loading")
+            let storageRef = Storage.storage().reference().child("UserImages").child("\(uniString).png")
             if let uploadData = UIImagePNGRepresentation(selectedImage) {
                 storageRef.putData(uploadData, metadata: nil, completion: { (data, error) in
                     
@@ -168,15 +175,17 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         
                     }else{
                         //get image URL
-                        if let imageURL = data?.downloadURL()?.absoluteString {
-                            print("Photo Url: \(imageURL)")
-                            URLSession.shared.dataTask(with: URL(string: imageURL)!, completionHandler: { (data, response, error) in
+                        if let imageString = data?.downloadURL()?.absoluteString {
+                            self.userImgString = imageString
+                            print("Photo Url: \(imageString)")
+                            URLSession.shared.dataTask(with: URL(string: imageString)!, completionHandler: { (data, response, error) in
                                 
                                 if error != nil {
                                     print(error!.localizedDescription)
                                 }else if let imgdata = data {
                                     DispatchQueue.main.sync {
                                         self.imageView.image = UIImage(data: imgdata)
+                                        UIApplication.shared.endIgnoringInteractionEvents()
                                     }
                                 }
                             }).resume()

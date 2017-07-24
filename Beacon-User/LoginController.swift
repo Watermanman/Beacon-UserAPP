@@ -11,13 +11,14 @@ import Firebase
 import FirebaseAuth
 
 class LoginController: UIViewController {
+    @IBOutlet weak var loginAI: UIActivityIndicatorView!
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+    let imageView = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.loginAI.hidesWhenStopped = true
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -28,12 +29,17 @@ class LoginController: UIViewController {
     
     @IBAction func checkAcCountAction(){
         view.endEditing(true)
+
+        
         if self.emailTextField.text == "" || self.passwordTextField.text == ""{
             let alertController = UIAlertController(title: "Error", message: "Please enter your email and password", preferredStyle: .alert)
             let delfaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(delfaulAction)
             present(alertController, animated: true, completion: nil)
         }else{
+        
+            self.loginAI.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
                 if error == nil {
                     //successfully
@@ -50,6 +56,7 @@ class LoginController: UIViewController {
                             //new user
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome")
                             self.present(vc!, animated: true, completion: nil)
+                            UIApplication.shared.endIgnoringInteractionEvents()
                             //self.performSegue(withIdentifier: "Welcome", sender: Any?.self)
                         }else{
                             //Extied user
@@ -60,13 +67,37 @@ class LoginController: UIViewController {
                             ref.child("users").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
                                 // Get user value
                                 let userinfo = snapshot.value as? NSDictionary
-                                self.performSegue(withIdentifier: "List", sender: userinfo)
+                                
+                                let imageString = userinfo?["image"] as? String ?? ""
+                                if imageString != "" {
+                                    URLSession.shared.dataTask(with: URL(string: imageString)!, completionHandler: { (data, response, error) in
+                                        
+                                        if error != nil {
+                                            print(error!.localizedDescription)
+                                        }else if let imgdata = data {
+                                            DispatchQueue.main.sync {
+                                                self.imageView.image = UIImage(data: imgdata)
+                                                self.loginAI.stopAnimating()
+                                                UIApplication.shared.endIgnoringInteractionEvents()
+                                                self.performSegue(withIdentifier: "List", sender: userinfo)
+                                            }
+                                        }
+                                    }).resume()
+                                }else{
+                                    self.imageView.image = #imageLiteral(resourceName: "user3")
+                                    self.performSegue(withIdentifier: "List", sender: userinfo)
+                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                }
+                                
+                                
                             })
                            
                         }
                     })
                     
                 }else{
+                    self.loginAI.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
@@ -84,19 +115,19 @@ class LoginController: UIViewController {
         if segue.identifier == "List" {
             let vc = segue.destination as! ListItemController
             vc.userInfo = sender as! Dictionary
-
+            vc.imageView = self.imageView
         }
         
     }
-    @IBAction func check1(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            sender.backgroundImage(for: UIControlState.normal)
-        }else{
-            sender.isSelected = true
-            sender.backgroundImage(for: UIControlState.selected)
-        }
-    }
+//    @IBAction func check1(_ sender: UIButton) {
+//        if sender.isSelected {
+//            sender.isSelected = false
+//            sender.backgroundImage(for: UIControlState.normal)
+//        }else{
+//            sender.isSelected = true
+//            sender.backgroundImage(for: UIControlState.selected)
+//        }
+//    }
     
     @IBAction func resetPassword(_ sender: Any) {
         if self.emailTextField.text == "" {

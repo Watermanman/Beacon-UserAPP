@@ -11,7 +11,8 @@ import Firebase
 import FirebaseAuth
 
 class HomePageController: UIViewController {
-    
+    var tmpImg = UIImageView()
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var jobLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var featureLabel: UILabel!
@@ -26,8 +27,20 @@ class HomePageController: UIViewController {
         let age = userInfo["age"] as? Int ?? 100
         let gender = userInfo["gender"] as? String ?? ""
         self.featureLabel.text = String(gender) + "性 " + String(age) + "歲"
-
-        
+        self.imageView.image = tmpImg.image
+//        let imageString = userInfo["image"] as? String ?? ""
+//        if imageString != "" {
+//            URLSession.shared.dataTask(with: URL(string: imageString)!, completionHandler: { (data, response, error) in
+//            
+//                if error != nil {
+//                    print(error!.localizedDescription)
+//                }else if let imgdata = data {
+//                    DispatchQueue.main.sync {
+//                        self.imageView.image = UIImage(data: imgdata)
+//                    }
+//                }
+//            }).resume()
+//        }
         
     }
     
@@ -40,6 +53,8 @@ class HomePageController: UIViewController {
         if segue.identifier == "Goedit" {
             let vc = segue.destination as? EditInfoController
             vc?.userinfo = self.userInfo
+            vc?.tmpImg = self.tmpImg
+            
         }
     }
     
