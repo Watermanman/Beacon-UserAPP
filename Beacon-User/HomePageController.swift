@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class HomePageController: UIViewController {
+class HomePageController: UIViewController, ESTBeaconManagerDelegate {
     var tmpImg = UIImageView()
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var jobLabel: UILabel!
@@ -69,6 +69,8 @@ class HomePageController: UIViewController {
                 try user.signOut()
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
                 present(vc, animated: true, completion: nil)
+                
+                
             }catch let error as NSError{
                 print(error.localizedDescription)
             }

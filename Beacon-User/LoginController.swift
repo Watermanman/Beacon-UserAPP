@@ -49,6 +49,16 @@ class LoginController: UIViewController {
 //                    self.present(vc!, animated: true, completion: nil)
                     
                     let ref = Database.database().reference()
+//                    ref.child("UID2NumID").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                        let NumID = snapshot.value as? NSDictionary ?? [:]
+//                        if NumID.count < 1 {
+//                            //New User
+//                        }else{
+//                            //Extied User
+//                            
+//                            ref.child("users").child(NumID)
+//                        }
+//                    })
                     ref.child("users").child((user?.uid)!).observeSingleEvent(of: .value, with: { (DataSnapshot) in
                         let userinfo = DataSnapshot.value as? NSDictionary ?? [:]
                         print(userinfo.count)
@@ -64,6 +74,7 @@ class LoginController: UIViewController {
 
 //                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "List")
 //                            self.present(vc!, animated: true, completion: nil)
+                            
                             ref.child("users").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
                                 // Get user value
                                 let userinfo = snapshot.value as? NSDictionary
