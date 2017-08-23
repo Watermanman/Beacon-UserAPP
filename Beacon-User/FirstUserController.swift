@@ -11,13 +11,15 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
-
+import FBSDKLoginKit
 
 
 class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var ref = Database.database().reference()
     @IBOutlet weak var jobPickerTextField: UITextField!
     let job = ["服務業","軍公教","學生","上班族"]
+    var currentUserNum = 0
+    var userID = 0
     var userImgString = ""
     let currentUser = Auth.auth().currentUser
     @IBOutlet weak var gender: UISegmentedControl!
@@ -35,7 +37,17 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
-        // Do any additional setup after loading the view, typically from a nib.
+        //Facebook login
+        
+        if let fbname = self.currentUser?.displayName {
+            self.usernameLabel.text = fbname
+        }
+        if let photoUrl = self.currentUser?.photoURL {
+            print(photoUrl)
+        }
+        
+
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,16 +97,28 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                   "indoor": false,
                   "dirty" : false ]
        
-            self.ref.child("users").child((user?.uid)!).setValue(userinfo)
-            self.performSegue(withIdentifier: "Interest", sender: userinfo)
+            //create UserID in table
+            self.ref.child("userNum").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.currentUserNum = snapshot.value as! Int
+                self.userID = self.currentUserNum + 1
+                self.ref.child("userNum").setValue(self.userID)
+                self.ref.child("UID2NumID").child((user?.uid)!).setValue(self.userID)
+                self.ref.child("users").child("\(self.userID)").setValue(userinfo)
+                self.performSegue(withIdentifier: "Interest", sender: userinfo)
+            })
+            
+            
+            
         }
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //undo
         if segue.identifier == "Golist" {
             let vc = segue.destination as! ListItemController
             vc.userInfo = sender as! Dictionary
             vc.imageView = self.imageView
+            vc.userID = self.userID
         }
     }
     

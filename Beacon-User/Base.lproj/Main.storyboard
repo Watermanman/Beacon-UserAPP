@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -72,6 +72,13 @@
                                 <rect key="frame" x="216" y="422" width="20" height="20"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBM-BQ-YZ2">
+                                <rect key="frame" x="122.5" y="519" width="129" height="30"/>
+                                <state key="normal" title="使用FaceBook登入"/>
+                                <connections>
+                                    <action selector="facebookLoginWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5QJ-Az-UUa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -80,8 +87,10 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="iH3-JG-05C" secondAttribute="bottom" constant="42" id="9gO-CR-fYj"/>
                             <constraint firstItem="iH3-JG-05C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Du5-GK-v4s"/>
                             <constraint firstItem="kKR-vh-uK5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Eg2-hz-Vxf"/>
+                            <constraint firstItem="kBM-BQ-YZ2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FPj-5O-t1M"/>
                             <constraint firstItem="gwz-pW-iWE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KU9-cm-SLe"/>
                             <constraint firstItem="gwz-pW-iWE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="130" id="NYV-Np-J21"/>
+                            <constraint firstItem="I3F-eT-s5J" firstAttribute="top" secondItem="kBM-BQ-YZ2" secondAttribute="bottom" constant="8" id="Uno-05-Cuc"/>
                             <constraint firstItem="I3F-eT-s5J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZVM-WS-Lbu"/>
                             <constraint firstItem="IrG-ry-Cwi" firstAttribute="top" secondItem="JHd-wn-pqw" secondAttribute="bottom" constant="15" id="a4S-Rb-5bF"/>
                             <constraint firstItem="I3F-eT-s5J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h3P-SJ-GYz"/>
@@ -680,16 +689,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-3r-2fy">
-                                <rect key="frame" x="164" y="387" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-3r-2fy">
+                                <rect key="frame" x="156" y="424" width="62" height="30"/>
+                                <state key="normal" title="尋找配對"/>
                                 <connections>
                                     <action selector="startPairAction:" destination="HbO-Oc-VN9" eventType="touchUpInside" id="Vb0-vw-jeU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av0-C4-gMO">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av0-C4-gMO">
+                                <rect key="frame" x="91.5" y="313" width="191" height="41"/>
+                                <string key="text">尋找新朋友，豐富生活圈
+就從現在開始！</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -697,6 +707,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90298569169999998" green="0.6610415623" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="VMW-3r-2fy" firstAttribute="centerX" secondItem="k6O-W8-l1n" secondAttribute="centerX" id="7SM-eO-G56"/>
+                            <constraint firstItem="VMW-3r-2fy" firstAttribute="top" secondItem="av0-C4-gMO" secondAttribute="bottom" constant="70" id="Bvf-VW-FlB"/>
                             <constraint firstItem="av0-C4-gMO" firstAttribute="centerX" secondItem="k6O-W8-l1n" secondAttribute="centerX" id="ToC-3W-45H"/>
                             <constraint firstItem="av0-C4-gMO" firstAttribute="centerY" secondItem="k6O-W8-l1n" secondAttribute="centerY" id="Xhb-Fv-cPh"/>
                         </constraints>
@@ -925,7 +937,7 @@
         <image name="user2" width="100" height="134"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uog-mK-CV4"/>
+        <segue reference="ddc-il-vjh"/>
         <segue reference="bPx-0v-uy5"/>
     </inferredMetricsTieBreakers>
 </document>

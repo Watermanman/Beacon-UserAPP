@@ -21,11 +21,14 @@ class EditInfoController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     let job = ["服務業","軍公教","學生","上班族"]
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
+    var userID = 0
     var userImgString = ""
     var tmpImg = UIImageView()
     var userinfo = Dictionary<String, Any>()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         self.imageView.image = tmpImg.image
         self.userImgString = self.userinfo["image"] as? String ?? ""
@@ -82,14 +85,30 @@ class EditInfoController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     @IBAction func editDone(){
         let user = Auth.auth().currentUser
-        self.userinfo =
-            [ "name": self.usernameLabel.text!,
-              "age" : Int(self.ageLabel.text!) ?? 18,
-              "job" : self.jobPickerTextField.text!,
-              "image": self.userImgString,
-              "gender": self.gender.titleForSegment(at: self.gender.selectedSegmentIndex) ?? 0,
-              ]
-        self.ref.child("users").child((user?.uid)!).updateChildValues(self.userinfo)
+        
+        ref.child("UID2NumID").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.userID = snapshot.value as? Int ?? -1
+            if(self.userID > 0) {
+                self.userinfo =
+                    [ "name": self.usernameLabel.text!,
+                      "age" : Int(self.ageLabel.text!) ?? 18,
+                      "job" : self.jobPickerTextField.text!,
+                      "image": self.userImgString,
+                      "gender": self.gender.titleForSegment(at: self.gender.selectedSegmentIndex) ?? 0,
+                ]
+                
+                
+                self.ref.child("users").child("\(self.userID)").updateChildValues(self.userinfo)
+            }else{
+                let alertController = UIAlertController(title: "Error", message: "發生錯誤，請確認網路後再試一次", preferredStyle: .alert)
+                let delfaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(delfaulAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        })
+        
+        
+        
     }
     
     

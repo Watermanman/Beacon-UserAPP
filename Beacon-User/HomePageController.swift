@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class HomePageController: UIViewController, ESTBeaconManagerDelegate {
     var tmpImg = UIImageView()
+    var userID = 0
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var jobLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -22,6 +23,7 @@ class HomePageController: UIViewController, ESTBeaconManagerDelegate {
       
         super.viewDidLoad()
         print(userInfo)
+        print("my id is: \(self.userID)")
         self.usernameLabel.text = userInfo["name"] as? String ?? ""
         self.jobLabel.text = userInfo["job"] as? String ?? ""
         let age = userInfo["age"] as? Int ?? 100
@@ -54,7 +56,7 @@ class HomePageController: UIViewController, ESTBeaconManagerDelegate {
             let vc = segue.destination as? EditInfoController
             vc?.userinfo = self.userInfo
             vc?.tmpImg = self.tmpImg
-            
+            vc?.userID = self.userID
         }
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
 
 extension UIView {
     func menu() {
@@ -35,12 +36,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate{
         // Override point for customization after application launch.
         ESTConfig.setupAppID("mybeaconservice-mqh", andAppToken: "ed04c2ecb77c11f5cd2416d37a270dc3")
         FirebaseApp.configure()
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         return true
     }
-    
-    func beaconManager(_ manager: Any, didEnter region: CLBeaconRegion) {
-        print("@@")
-       
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        
+        return handled
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

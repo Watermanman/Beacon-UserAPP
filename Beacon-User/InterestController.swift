@@ -19,6 +19,7 @@ class InterestController: UIViewController {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     let imageView = UIImageView()
+    var userID = 0
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
     var questionNum = 0
@@ -63,33 +64,54 @@ class InterestController: UIViewController {
             }
             print(interestScore)
             
+//            var scoreString = ""
+//            for k in self.interestValue {
+//                scoreString += String(k)
+//            }
+//            print(scoreString)
+            
             //save info to database and get some value
             self.waitAI.startAnimating()
             UIApplication.shared.beginIgnoringInteractionEvents()
-            ref.child("users").child((user?.uid)!).updateChildValues(["interestScore": interestScore])
             
-            ref.child("users").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let userinfo = snapshot.value as? NSDictionary
+            self.ref.child("UID2NumID").child((self.user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+                self.userID = snapshot.value as! Int
                 
-                let imageString = userinfo?["image"] as? String ?? ""
-                if imageString != "" {
-                    URLSession.shared.dataTask(with: URL(string: imageString)!, completionHandler: { (data, response, error) in
-                        
-                        if error != nil {
-                            print(error!.localizedDescription)
-                        }else if let imgdata = data {
-                            DispatchQueue.main.sync {
-                                self.imageView.image = UIImage(data: imgdata)
-                                self.waitAI.stopAnimating()
-                                UIApplication.shared.endIgnoringInteractionEvents()
-                                self.performSegue(withIdentifier: "Golist", sender: userinfo)
+                //update interestScore
+                self.ref.child("users").child("\(self.userID)").updateChildValues(["interestScore": interestScore])
+                
+                //get user info
+                self.ref.child("users").child("\(self.userID)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let userinfo = snapshot.value as? NSDictionary
+                    
+                    let imageString = userinfo?["image"] as? String ?? ""
+                    if imageString != "" {
+                        URLSession.shared.dataTask(with: URL(string: imageString)!, completionHandler: { (data, response, error) in
+                            
+                            if error != nil {
+                                print(error!.localizedDescription)
+                            }else if let imgdata = data {
+                                DispatchQueue.main.sync {
+                                    self.imageView.image = UIImage(data: imgdata)
+                                    self.waitAI.stopAnimating()
+                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                    self.performSegue(withIdentifier: "Golist", sender: userinfo)
+                                }
                             }
-                        }
-                    }).resume()
-                }
+                        }).resume()
+                    }else{
+                        
+                        self.imageView.image = #imageLiteral(resourceName: "user3")
+                        self.waitAI.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        self.performSegue(withIdentifier: "Golist", sender: userinfo)
+                    }
+                })
+              
             })
             //Go to ListController(Homepage)
+            
         }
         
     }
@@ -99,6 +121,7 @@ class InterestController: UIViewController {
             let vc = segue.destination as! ListItemController
             vc.userInfo = sender as! Dictionary
             vc.imageView = self.imageView
+            vc.userID = self.userID
         }
     }
     /*

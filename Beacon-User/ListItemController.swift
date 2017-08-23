@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class ListItemController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var imageView = UIImageView()
-    
+    var userID = 0
     var userInfo = Dictionary<String, Any>()
     @IBOutlet var homepageView: UIView!
     let list = ["首頁", "社交"]
@@ -78,6 +78,14 @@ class ListItemController: UIViewController, UITableViewDataSource, UITableViewDe
             if let vc = nc?.viewControllers[0] as? HomePageController {
                 vc.userInfo = self.userInfo
                 vc.tmpImg = self.imageView
+                vc.userID = self.userID
+            }
+        }
+        if segue.identifier == "userpair" {
+            let nc = segue.destination as? UINavigationController
+            if let vc = nc?.viewControllers[0] as? PairPageController {
+                vc.userInfo = self.userInfo
+                vc.userID = self.userID
             }
         }
         
