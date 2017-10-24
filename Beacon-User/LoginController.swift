@@ -19,11 +19,13 @@ class LoginController: UIViewController {
     let imageView = UIImageView()
     var currentUserNum = 0
     var userID = 0
+    var fbLogin = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loginAI.hidesWhenStopped = true
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,7 +34,8 @@ class LoginController: UIViewController {
     
     @IBAction func facebookLogin(sender: UIButton) {
         let fbLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_likes"], from: self) { (result, error) in
+        
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_likes", "user_friends"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
                 return
@@ -42,7 +45,7 @@ class LoginController: UIViewController {
                 print("Failed to get access token")
                 return
             }
-            
+            self.fbLogin = true
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             
             // Perform login by calling Firebase APIs
@@ -55,7 +58,56 @@ class LoginController: UIViewController {
                     self.present(alertController, animated: true, completion: nil)
                     
                     return
+                }else{
+                    self.loginAI.startAnimating()
+                    UIApplication.shared.beginIgnoringInteractionEvents()
+                    //Login sucessfully
+                    let ref = Database.database().reference()
+                    ref.child("UID2NumID").child((user?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? Int ?? -1
+                        
+                        if value < 0 {
+                            //New User
+                            self.loginAI.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome")
+                            self.present(vc!, animated: true, completion: nil)
+                        }else{
+                            //extied user
+                            self.userID = value
+                            ref.child("users").child("\(self.userID)").observeSingleEvent(of: .value, with: { (snapshot) in
+                                // Get user value
+                                let userinfo = snapshot.value as? NSDictionary
+                                
+                                let imageString = userinfo?["image"] as? String ?? ""
+                                if imageString != "" {
+                                    URLSession.shared.dataTask(with: URL(string: imageString)!, completionHandler: { (data, response, error) in
+                                        
+                                        if error != nil {
+                                            print(error!.localizedDescription)
+                                        }else if let imgdata = data {
+                                            DispatchQueue.main.sync {
+                                                self.imageView.image = UIImage(data: imgdata)
+                                                self.loginAI.stopAnimating()
+                                                UIApplication.shared.endIgnoringInteractionEvents()
+                                                self.performSegue(withIdentifier: "List", sender: userinfo)
+                                            }
+                                        }
+                                    }).resume()
+                                }else{
+                                    self.loginAI.stopAnimating()
+                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                    self.imageView.image = #imageLiteral(resourceName: "user3")
+                                    self.loginAI.stopAnimating()
+                                    self.performSegue(withIdentifier: "List", sender: userinfo)
+                                    
+                                }
+                            })
+                        }
+                    })
                 }
+                
+                
                 
                 
 //                if((FBSDKAccessToken.current()) != nil){
@@ -70,24 +122,18 @@ class LoginController: UIViewController {
 //                        
 //                    })
 //                    
-//                    FBSDKGraphRequest(graphPath: "/1524655197596107/likes", parameters: ["fields" : "data"], httpMethod: "GET").start(completionHandler: { (_ connection, result, error) in
+//                    FBSDKGraphRequest(graphPath: "/1524655197596107/likes", parameters: ["fields" : "id,fan_count"], httpMethod: "GET").start(completionHandler: { (_ connection, result, error) in
 //                        if(error == nil){
 //                            print(result)
 //                        }else{
 //                            print("\(error?.localizedDescription)")
 //                        }
 //                    })
-//                   
-//                    
 //                }
-                
-                // Present the main view
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome")
-                self.present(vc!, animated: true, completion: nil)
-                
+
             })
-            
-        }   
+        }
+
     }
     
     @IBAction func checkAcCountAction(){
@@ -228,6 +274,7 @@ class LoginController: UIViewController {
             vc.userInfo = sender as! Dictionary
             vc.imageView = self.imageView
             vc.userID = self.userID
+            
         }
         
     }

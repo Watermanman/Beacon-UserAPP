@@ -57,6 +57,7 @@ class ListItemController: UIViewController, UITableViewDataSource, UITableViewDe
         switch indexPath.row {
         case 0:
             tmpView = homepageView
+            print("put home")
         case 1:
             tmpView = pairpageView
         default:

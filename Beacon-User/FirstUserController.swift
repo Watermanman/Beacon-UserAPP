@@ -20,6 +20,7 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     let job = ["服務業","軍公教","學生","上班族"]
     var currentUserNum = 0
     var userID = 0
+    var userLikes: Array<String> = []
     var userImgString = ""
     let currentUser = Auth.auth().currentUser
     @IBOutlet weak var gender: UISegmentedControl!
@@ -37,18 +38,102 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
-        //Facebook login
         
+        
+        //Facebook login
         if let fbname = self.currentUser?.displayName {
             self.usernameLabel.text = fbname
         }
-        if let photoUrl = self.currentUser?.photoURL {
-            print(photoUrl)
-        }
+//        if let photoUrl = self.currentUser?.photoURL {
+//            print(photoUrl)
+//        }
         
+        //================Info of Facebook==================
+        if((FBSDKAccessToken.current()) != nil){
+            //Get User Personal Info
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, name, first_name, last_name, email, gender"]).start(completionHandler: { (connection, userResult, error) in
+                if(error == nil){
+                    let fbUserInfo = userResult as! NSDictionary
+                    //let name = fbUserInfo["name"] as! String
+                    let fbUserID = fbUserInfo["id"] as! String
+                    print(fbUserInfo)
+                    
+                    //Get User Likes
+                    FBSDKGraphRequest(graphPath: "/\(fbUserID)/likes?limit=1000", parameters: ["fields" : "id,fan_count"], httpMethod: "GET").start(completionHandler: { (_ connection, result, error) in
+                        if(error == nil){
+                            
+                            let result:Dictionary<String, AnyObject> = result as! Dictionary<String, AnyObject>
+                            let arry = result["data"] as! NSArray
+                            if arry.count > 0 {
+                                for i in 0...arry.count - 1 {
+                                    let fans = arry[i] as! NSDictionary
+                                    if fans["fan_count"] as! Int > 1000000 {
+                                        self.userLikes.append(fans["id"] as! String)
+                                    }
+                                }
+                                if let nextCursor = result["paging"]!["next"]! as? String {
+                                    self.parseUserlikes(nextpath: nextCursor)
+                                }
+                            }
+                        }else{
+                            print("\(String(describing: error?.localizedDescription))")
+                        }
+                    })
+                    
+                    
 
-        
+                }
+            })
+            
+            
+        }
     }
+    
+    
+    func parseUserlikes(nextpath: String) {
+        
+        let url = URL(string: nextpath)
+        let task = URLSession.shared.dataTask(with: url!)
+        {(data, response, error) in
+            guard let data = data, error == nil else { return }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                
+                let result:Dictionary<String, AnyObject> = json as Dictionary<String, AnyObject>
+                
+                let arry = result["data"] as! NSArray
+                
+                if( arry.count > 0 ){
+                    for i in 0...arry.count - 1 {
+                        let fans = arry[i] as! NSDictionary
+                        if fans["fan_count"] as! Int > 1000000 {
+                            //print(fans["id"]!)
+                            self.userLikes.append(fans["id"] as! String)
+                        }
+                    }
+                }
+                
+                if result["paging"] as? NSDictionary != nil {
+                    if let nextCursor = result["paging"]!["next"]! as? String {
+                        self.parseUserlikes(nextpath: nextCursor)
+                    }else{
+                        print(self.userLikes)
+                        print(self.userLikes.count)
+                    }
+                }else{
+                    print(self.userLikes)
+                    print(self.userLikes.count)
+                }
+                
+            } catch let error as NSError {
+                print(error)
+            }
+            
+        }
+        task.resume()
+    }
+
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,7 +180,8 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                   "image": self.userImgString,
                   "interestScore": 0,
                   "indoor": false,
-                  "dirty" : false ]
+                  "dirty" : false,
+                  "userlike": self.userLikes]
        
             //create UserID in table
             self.ref.child("userNum").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -104,6 +190,7 @@ class FirstUserController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 self.ref.child("userNum").setValue(self.userID)
                 self.ref.child("UID2NumID").child((user?.uid)!).setValue(self.userID)
                 self.ref.child("users").child("\(self.userID)").setValue(userinfo)
+                
                 self.performSegue(withIdentifier: "Interest", sender: userinfo)
             })
             

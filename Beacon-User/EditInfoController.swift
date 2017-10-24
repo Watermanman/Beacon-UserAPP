@@ -99,6 +99,7 @@ class EditInfoController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 
                 
                 self.ref.child("users").child("\(self.userID)").updateChildValues(self.userinfo)
+                self.performSegue(withIdentifier: "Editdone", sender: self.userinfo)
             }else{
                 let alertController = UIAlertController(title: "Error", message: "發生錯誤，請確認網路後再試一次", preferredStyle: .alert)
                 let delfaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -115,7 +116,7 @@ class EditInfoController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Editdone" {
             if let vc = segue.destination as? HomePageController{
-                vc.userInfo = self.userinfo
+                vc.userInfo = sender as! Dictionary
                 vc.tmpImg = self.imageView
             }
         }
